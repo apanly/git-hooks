@@ -1,0 +1,17 @@
+#!/usr/bin/php
+<?php
+$cmd = "/usr/bin/php /home/www/yii/rantech/yii  apitest/test/run";//根据个人情况修改
+exec($cmd,$output,$code);
+//var_dump(implode("\n", $output));//根据个人情况打开输出
+if($code == 0){
+	list($success_count,$total) = explode("/",$output[count($output)-1]);
+    $success_count = (int) $success_count;
+    $total = (int) $total;
+    if($success_count == $total){
+        $code = 0;
+    }else{
+        $code = 1;
+        echo 'Api测试未通过!!\n';
+    }
+}
+exit($code);
